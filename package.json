@@ -1,0 +1,7 @@
+{
+  "name": "PPR-server",
+  "version": "1.0.0",
+  "description": "Серверная часть Цифрового ППР",
+  "main": "index.js",
+  "license": "MIT"
+}
