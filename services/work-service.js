@@ -59,11 +59,16 @@ class workService {
     );
   }
   async updateWork(id, param, value) {
-    await db.query(`UPDATE works SET $2 = $3 WHERE id = $1`, [
-      id,
-      param,
-      value,
-    ]);
+    const queryString = `UPDATE works SET ${param}='${value}' WHERE id=${id} RETURNING *`;
+    const queryResult = await db.query(queryString);
+    return queryResult.rows;
+  }
+  async getWorkData(id) {
+    const queryResult = await db.query(
+      `SELECT * FROM works WHERE id = $1 RETURNING *`,
+      [id]
+    );
+    return queryResult.rows;
   }
 }
 module.exports = new workService();
