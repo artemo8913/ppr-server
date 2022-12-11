@@ -3,32 +3,36 @@ const db = require("../db");
  * Сервис для работы с ППРами.
  * ДБ хранит в себе: id строки,
  */
-class pprService {
-  async addNewPlanToAllYearsPlans(
-    name,
+class PprService {
+  async getPlanFromAllPlans(nameOfPprTable) {
+    const queryResult = await db.query(`SELECT * FROM all_pprs WHERE name=$1`, [
+      nameOfPprTable,
+    ]);
+    return queryResult.rows[0];
+  }
+  async addNewPlanToAllPlans(
+    nameOfPprTable,
     year,
-    id_subdivision,
-    id_distance,
-    id_direction,
-    status = "формирование"
+    idSubdivision,
+    idDistance,
+    idDirection,
+    status
   ) {
     const queryResult = await db.query(
-      `INSERT INTO all_pprs (name, year, id_subdivision, id_distance, id_direction, status) RETURNING id`,
-      [name, year, id_subdivision, id_distance, id_direction, status]
+      `INSERT INTO all_pprs (name, year, id_subdivision, id_distance, id_direction, status) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`,
+      [nameOfPprTable, year, idSubdivision, idDistance, idDirection, status]
     );
     return queryResult.rows[0];
   }
-  async createNewYearPlan(
-    name,
-    year,
-    id_subdivision,
-    id_distance,
-    id_direction,
-    status = "формирование"
-  ) {
-    const queryResult = await db.query(
-      `CREATE TABLE $1_$2 RETURNING *`,[name,year]
-    );
+  async updatePlanInAllYearsPlans(id, param, value) {
+    const queryString = `UPDATE all_pprs SET ${param}='${value} WHERE id=${id}' RETURNING *`;
+    const queryResult = await db.query(queryString);
+    return queryResult.rows[0];
+  }
+  async createNewYearPlan(prototypePlanName, nameOfPprTable) {
+    const queryString = `CREATE TABLE ${nameOfPprTable} AS SELECT * FROM ${prototypePlanName}`;
+    const queryResult = await db.query(queryString);
+    console.log(queryResult);
   }
 }
-module.exports = new pprService();
+module.exports = new PprService();
