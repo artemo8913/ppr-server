@@ -1,16 +1,61 @@
 #Цифровой ППР дистанции электроснабжения. Серверная часть.
 Node.JS + Express + PG + PostgreSQL
 
-## SQL Database table
+## SQL Database tables
+============================================
 |Название таблицы| Описание|
 | ------------ | ---------- |
 | all_pprs     | Содержит сводные данные обо всех годовых планах |
 | directions   | Перечень дирекций по энергообеспечению |
 | distances    | Перечень дистанций по электроснабжению |
-| ppr_proto    | Шаблон для составления годового плана |
 | subdivisions | Перечень подразделений дистанций |
+| ppr_proto    | Шаблон для составления годового плана |
 | users        | Данные пользователей |
 | works        | Информация о работах |
+
+------------- directions ------------------
+|Название Поля | Описание   |
+| ------------ | ---------- |
+| id           | id         |
+| name         | Наименование |
+| name_short   | Короткое наименование |
+
+------------- distances -------------------
+|Название Поля | Описание   |
+| ------------ | ---------- |
+| id           | id         |
+| id_direction | Ссылка на id дирекции, куда входит дистанция |
+| name         | Наименоваие|
+| name_short   | Короткое наименование |
+
+------------- subdivisions ----------------
+|Название Поля | Описание   |
+| ------------ | ---------- |
+| id           | id         |
+| id_distance  | Ссылка на id дистанции куда входит подразделение |
+| name         | Наименоваие|
+| name_short   | Короткое наименование |
+
+-------------  users ----------------------
+|Название Поля | Описание   |
+| ------------ | ---------- |
+| id           | id         |
+| login        | логин      |
+| password     | хэшированный пароль |
+| role         | роль пользователя   |
+| id_subdivision | id подразделения (если работает в подразделении) |
+| id_distance  | id дистанции (если работает в дистанции) |
+| id_direction | id дирекции (если работает в дирекции) |
+============================================
+
+---------------- all_pprs -------------------
+id | year | id_subdivision | id_distance | id_direction | status | name
+
+------------- works ------------------------
+id | branch | section | subsection | legal_document | legal_document_chapter | norm_of_time | norm_of_time_document | first_periodicity | second_periodicity | third_periodicity | forth_periodisity | fifth_periodisity | measure | subbranch
+
+---------------- ppr_proto -------------------
+id | index_number | work_id | user_branch | user_section | user_subsection | user_legal_document | user_norm_of_time | user_norm_of_time_document | user_periodicity | location | entry_year | last_maintenance_year | totalcount | user_measure | class_of_line | year_plan | year_plan_time | year_fact | year_fact_norm_time | year_fact_time | jan_plan | jan_plan_time | jan_fact | jan_fact_norm_time | jan_fact_time | feb_plan | feb_plan_time | feb_fact | feb_fact_norm_time | feb_fact_time | mar_plan | mar_plan_time | mar_fact | mar_fact_norm_time | mar_fact_time | subbranch
 
 #Описание задачи 
 ##Процесс составления планов 
