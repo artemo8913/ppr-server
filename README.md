@@ -46,10 +46,18 @@ Node.JS + Express + PG + PostgreSQL
 | id_subdivision | id подразделения (если работает в подразделении) |
 | id_distance  | id дистанции (если работает в дистанции) |
 | id_direction | id дирекции (если работает в дирекции) |
-============================================
 
 ---------------- all_pprs -------------------
-id | year | id_subdivision | id_distance | id_direction | status | name
+|Название Поля | Описание   |
+| ------------ | ---------- |
+| id | id |
+| year | год годового плана|
+| id_subdivision | id подразделения|
+|id_distance | id дистанции |
+|id_direction | id дирекции |
+|status | статус (состояние) |
+|name| наименование |
+* Хотя годовые планы составляются исключительно в подразделениях, думаю, что дать возможность дистанциям и дирекциям разрабатывать свои шаблоны для ППР, на основе которых подразделения могли бы делать свои ППР. С другой стороны можно данные поля и оставить только id_subdivision, в котором null значило, что это шаблон ППРа.
 
 ------------- works ------------------------
 id | branch | section | subsection | legal_document | legal_document_chapter | norm_of_time | norm_of_time_document | first_periodicity | second_periodicity | third_periodicity | forth_periodisity | fifth_periodisity | measure | subbranch
