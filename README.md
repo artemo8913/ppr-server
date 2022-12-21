@@ -60,10 +60,55 @@ Node.JS + Express + PG + PostgreSQL
 * Хотя годовые планы составляются исключительно в подразделениях, думаю, что стоит дать возможность дистанциям и дирекциям разрабатывать свои шаблоны для ППР, на основе которых подразделения могли бы делать свои ППР. С другой стороны можно удалить лишние поля и оставить только id_subdivision, в котором null значило бы, что это шаблон ППРа.
 
 ------------- works ------------------------
-id | branch | section | subsection | legal_document | legal_document_chapter | norm_of_time | norm_of_time_document | first_periodicity | second_periodicity | third_periodicity | forth_periodisity | fifth_periodisity | measure | subbranch
+|Название Поля | Описание   |
+| ------------ | ---------- |
+| id | id |
+| branch | раздел работ |
+| subbranch | подраздел работ |
+| section | общее название работы |
+| subsection | подраздел работы |
+| legal_document | наименование нормативного документа, утверждающую данную работу |
+| legal_document_chapter | глава нормативаного документа, утверждающую данную работу |
+| norm_of_time | норма времени на выполнение работы |
+| norm_of_time_document | документ, утверждающий норму времени на работу |
+| measure| единица измерения работы | 
+| first_periodicity | периодичность выполнения работы для линий I класса |
+| second_periodicity | периодичность выполнения работы для линий II класса |
+| third_periodicity | периодичность выполнения работы для линий III класса |
+| forth_periodisity | периодичность выполнения работы для линий IV класса |
+| fifth_periodisity | периодичность выполнения работы для линий V класса |
 
 ---------------- ppr_proto -------------------
-id | index_number | work_id | user_branch | user_section | user_subsection | user_legal_document | user_norm_of_time | user_norm_of_time_document | user_periodicity | location | entry_year | last_maintenance_year | totalcount | user_measure | class_of_line | year_plan | year_plan_time | year_fact | year_fact_norm_time | year_fact_time | jan_plan | jan_plan_time | jan_fact | jan_fact_norm_time | jan_fact_time | feb_plan | feb_plan_time | feb_fact | feb_fact_norm_time | feb_fact_time | mar_plan | mar_plan_time | mar_fact | mar_fact_norm_time | mar_fact_time | subbranch
+|Название Поля | Описание   |
+| ------------ | ---------- |
+| id | id |
+| index_number | id номер для строки |
+| work_id | id номер работы |
+| user_branch | (если нет work_id) пользовательский раздел работ |
+| user_subbranch | пользовательский подраздел работ |
+| user_section | (если нет work_id) общее название работы |
+| user_subsection | (если нет work_id) подраздел работы |
+| user_legal_document | (если нет work_id) наименование нормативного документа, утверждающую данную работу |
+| user_norm_of_time | (если нет work_id) норма времени на работу |
+| user_norm_of_time_document | (если нет work_id) документ, утверждающий норму времени на работу |
+| user_periodicity |периодичность проведения работы (фактическая, проставляется пользователем) |
+| user_measure | (если нет work_id) ед.измерения работы|
+| location | местоположение, участок проведения работ |
+| entry_year | год ввода в эксплуатация оборудования, в относительно которого создано оборудование |
+| last_maintenance_year | год последнего полного выполнения работ |
+| totalcount | общее кол-во оборудования |
+| class_of_line | класс линии участка |
+| year_plan | годовой план (объем работ) |
+| year_plan_time | требуемый затраты чел.-ч на выполнение годового объема работ |
+| year_fact | фактическое выполнение годового плана (объем работ) |
+| year_fact_norm_time | затраты чел.-ч на фактический выполненные объем в соответствии с номой времени  |
+| year_fact_time | фактические затраты чел.-ч на выполненные объем |
+| jan_plan | план на январь (объем работ) |
+| jan_plan_time | требуемый затраты чел.-ч на выполнение объема работ в январе |
+| jan_fact |  фактическое выполнение январского плана (объем работ) |
+| jan_fact_norm_time | затраты чел.-ч на фактический выполненные объем в соответствии с номой времени |
+| jan_fact_time | фактические затраты чел.-ч на выполненные объем |
+| ...etc | ... |
 
 # Описание задачи 
 ## Процесс составления планов 
