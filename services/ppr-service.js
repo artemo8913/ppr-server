@@ -74,7 +74,7 @@ class PprService {
   async getYearPlan(nameOfPprTable) {
     const queryString = `SELECT * FROM ${nameOfPprTable}`;
     const queryResult = await db.query(queryString);
-    return queryResult;
+    return queryResult.rows;
   }
   async updateYearPlan(nameOfPprTable, data) {
     const queryDeleteString = `DELETE FROM ${nameOfPprTable}`;
