@@ -46,7 +46,7 @@ class PprController {
     return res.json({ data: addPlanToAllPlan });
   }
   async getYearPlan(req, res, next) {
-    const { id } = req.body;
+    const { id } = req.params;
     //здесь валидацию прописать
     //body("id").isInt();
     const isPlanExist = await pprService.getPlanFromAllPlansById(id);
@@ -68,10 +68,14 @@ class PprController {
     return res.json({data: ppr});
   }
   async deleteYearPlan(req, res, next) {
-    const {id, pprName} = req.body;
-    const deletedPprName = await pprService.deletePprPlan(pprName);
+    const {id} = req.params;
+    const isPlanExist = await pprService.getPlanFromAllPlansById(id);
+    if (!isPlanExist) {
+      return res.status(400).end("Такого плана не существует");
+    }
+    const deletedPprName = await pprService.deletePprPlan(isPlanExist.name);
     const deletedTableId = await pprService.deletePlanFromAllPlans(id);
-    return res.json({data:`deleted ppr id: ${id}, name: ${pprName}`});
+    return res.json({data:`deleted ppr id: ${id}, name: ${isPlanExist.name}`});
   }
   async getAnalysisForCompanyDivision() {}
 }

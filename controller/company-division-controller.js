@@ -20,14 +20,14 @@ class WorkController {
     return res.json({ data: data });
   }
   async getDivisionData(req, res, next) {
-    const { divisionTableName, id } = req.body;
+    const { divisionTableName, id } = req.params;
     if (
       !companyDivisionService
         .getTableNames()
         .find((name) => name === divisionTableName) ||
       !id
     ) {
-      return res.status(400).end();
+      return res.status(400).end('Wrong or empty params divisionTableName and id');
     }
     const data = await companyDivisionService.getDivisionData(
       divisionTableName,
@@ -60,7 +60,7 @@ class WorkController {
     return res.json({ data: data });
   }
   async deleteDivision(req, res, next) {
-    const { divisionTableName, id } = req.body;
+    const { divisionTableName, id } = req.params;
     const data = await companyDivisionService.deleteDivision(
       divisionTableName,
       id

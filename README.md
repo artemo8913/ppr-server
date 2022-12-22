@@ -1,6 +1,38 @@
 # Цифровой ППР дистанции электроснабжения. Серверная часть.
 Node.JS + Express + PG + PostgreSQL
 
+## API запросы
+---------/api/work-------------------------
+- post("/", addWork)
+--- req.data:{branch, subbranch, section, subsection, legal_document, legal_document_chapter, measure, norm_of_time, norm_of_time_document, first_periodicity, second_periodicity, third_periodicity, forth_periodisity, fifth_periodisity}
+- get("/:id", getWorkData);
+--- req.params: {id}
+- get("/", getAllWorkData);
+- put("/", updateWorkData);
+--- req.data: {id, param, value}
+- delete("/:id", deleteWork)
+--- req.params: {id}.
+---------/api/ppr------------------------------
+- post("/", createYearPpr);
+--- req.data: {prototypePlanName, nameOfPprTable}.
+- get("/:id", getYearPlan);
+--- req.params: {id}.
+- get("/", getAllPlans);
+- put("/", updateYearPlan);
+--- req.data: {nameOfPprTable, data: {index_number, work_id, user_branch, subbranch, user_section, user_subsection, user_legal_document, user_norm_of_time, user_norm_of_time_document, user_periodicity, location, entry_year, last_maintenance_year, totalcount, user_measure, class_of_line, year_plan, year_plan_time, year_fact, year_fact_norm_time, year_fact_time, jan_plan, jan_plan_time, jan_fact, jan_fact_norm_time, jan_fact_time, feb_plan, feb_plan_time, feb_fact, feb_fact_norm_time, feb_fact_time, mar_plan, mar_plan_time, mar_fact, mar_fact_norm_time, mar_fact_time}}.
+- delete("/", deleteYearPlan);
+--- req.params: {id}.
+---------/api/divisions----------------
+- post("/", companyDivisionConntroller.createDivision);
+--- req.data: {divisionTableName, name, shortName};
+- get("/:divisionTableName/:id", companyDivisionConntroller.getDivisionData);
+--- req.params: {divisionTableName, id};
+- get("/all", companyDivisionConntroller.getAllDivisionsData);
+- put("/", companyDivisionConntroller.updateDivisionData);
+--- req.data: {divisionTableName, id, param, value};
+- delete("/", companyDivisionConntroller.deleteDivision);
+--- req.params: {divisionTableName, id};
+
 ## SQL Database tables
 ============================================
 |Название таблицы| Описание|

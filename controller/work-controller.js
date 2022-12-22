@@ -10,7 +10,7 @@ class WorkController {
     return res.json({ data: data });
   }
   async getWorkData(req, res, next) {
-    const id = req.body.id;
+    const id = req.params.id;
     if (!id) return res.status(400).end();
     const data = await workService.getWorkData(id);
     return res.json({ data: data });
@@ -22,7 +22,7 @@ class WorkController {
     return res.json({ data: data });
   }
   async deleteWork(req, res, next) {
-    const id = req.body.id;
+    const id = req.params.id;
     if (!id) return res.status(400).end();
     const data = await workService.deleteWork(id);
     return res.status(200).end();

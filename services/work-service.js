@@ -70,7 +70,7 @@ class workService {
   }
   async getWorkData(id) {
     const queryResult = await db.query(
-      `SELECT * FROM works WHERE id = $1 RETURNING *`,
+      `SELECT * FROM works WHERE id = $1`,
       [id]
     );
     return queryResult.rows[0];
