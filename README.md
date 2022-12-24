@@ -114,7 +114,7 @@ Node.JS + Express + PG + PostgreSQL
 |Название Поля | Описание   |
 | ------------ | ---------- |
 | id | id |
-| index_number | id номер для строки |
+| index_number | index строки для сортировки |
 | work_id | id номер работы |
 | user_branch | (если нет work_id) пользовательский раздел работ |
 | user_subbranch | пользовательский подраздел работ |
